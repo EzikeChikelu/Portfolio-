@@ -26,7 +26,7 @@ Open `index.html` in a browser, or serve the folder with any static file server.
 
 The workflow at `.github/workflows/pages.yml` deploys the repository root to GitHub Pages on every push to `main`.
 
-In the repository's **Settings → Pages**, choose **GitHub Actions** as the build and deployment source if it is not already configured. After the first successful workflow, the site should be available at:
+The deployment workflow attempts to enable GitHub Pages automatically. If the first run still asks for Pages setup, open **Settings → Pages** and choose **GitHub Actions** as the build and deployment source. After the first successful workflow, the site should be available at:
 
 https://ezikechikelu.github.io/Portfolio-/
 
