@@ -54,6 +54,53 @@
     .contact-panel{position:relative;overflow:hidden}
     .contact-panel:after{content:"LET'S MAKE\\A SOMETHING MATTER.";white-space:pre;position:absolute;right:18px;top:14px;font: .58rem var(--mono);letter-spacing:.14em;line-height:1.8;color:#ffffff18;text-align:right;pointer-events:none}
     .button:focus-visible,.filter:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
+
+    .case-intro{display:flex;align-items:end;justify-content:space-between;gap:24px;margin:64px 0 18px;padding-top:28px;border-top:1px solid var(--line)}
+    .case-intro h3{font-size:clamp(1.7rem,3vw,2.4rem);letter-spacing:-.06em;line-height:1.1;margin:0}
+    .case-grid{display:grid;gap:10px}
+    .case-study{border:1px solid var(--line);border-radius:15px;background:linear-gradient(120deg,#ffffff04,#ffffff01);overflow:hidden;transition:border-color .25s,background .25s}
+    .case-study[open]{border-color:#d1fb724d;background:linear-gradient(120deg,#d1fb7207,#ffffff01)}
+    .case-study summary{list-style:none;display:grid;grid-template-columns:78px 1fr 36px;align-items:center;gap:14px;padding:19px 21px;cursor:pointer}
+    .case-study summary::-webkit-details-marker{display:none}
+    .case-index{font-size:.62rem;color:var(--lime)}
+    .case-summary strong{display:block;font-size:.94rem;letter-spacing:-.025em}
+    .case-summary small{display:block;color:var(--muted);font-size:.72rem;margin-top:4px}
+    .case-plus{display:grid;place-items:center;width:31px;height:31px;border:1px solid var(--line);border-radius:50%;font-size:1.2rem;color:var(--lime);transition:transform .25s,background .25s}
+    .case-study[open] .case-plus{transform:rotate(45deg);background:#d1fb7210}
+    .case-detail{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding:4px 21px 22px 113px;border-top:1px solid #ffffff0c}
+    .case-detail .mono{display:block;color:#a9a0ff;font-size:.6rem;margin-top:17px}
+    .case-detail p{font-size:.78rem;line-height:1.8;color:var(--muted);margin:8px 0 0}
+    .case-detail>a{grid-column:1/-1;font-size:.77rem;font-weight:700;color:var(--lime)}
+    .activity-panel{border:1px solid var(--line);border-radius:19px;overflow:hidden;background:linear-gradient(145deg,#151820,#0e1015)}
+    .activity-top,.activity-bottom{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:19px 22px}
+    .activity-top{border-bottom:1px solid var(--line)}
+    .activity-profile{display:flex;align-items:center;gap:12px}
+    .activity-avatar{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:var(--lime);color:#12150a;font-weight:800;letter-spacing:-.07em}
+    .activity-profile strong{display:block;font-size:.86rem}
+    .activity-profile .mono{display:block;color:var(--muted);font-size:.58rem;margin-top:2px}
+    .activity-live{display:flex;align-items:center;gap:7px;color:var(--lime);font: .6rem var(--mono);letter-spacing:.07em}
+    .activity-live span{width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px #d1fb7280}
+    .activity-list{min-height:150px}
+    .activity-item{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:13px;align-items:start;padding:17px 22px;border-bottom:1px solid #ffffff0a;transition:background .2s}
+    .activity-item:hover{background:#ffffff04}
+    .activity-icon{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;color:var(--violet);font-size:1rem}
+    .activity-copy{min-width:0}
+    .activity-copy strong{display:block;font-size:.79rem;line-height:1.55;overflow-wrap:anywhere}
+    .activity-copy p{font-size:.71rem;color:var(--muted);margin:3px 0 0;overflow-wrap:anywhere}
+    .activity-copy a{color:var(--text);text-decoration:underline;text-decoration-color:#ffffff28;text-underline-offset:3px}
+    .activity-copy a:hover{color:var(--lime)}
+    .activity-time{color:#7f8796;font: .59rem var(--mono);white-space:nowrap;padding-top:3px}
+    .activity-loading{display:flex;align-items:center;gap:12px;padding:35px 22px;color:var(--muted);font-size:.8rem}
+    .loader-dot{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 5px #d1fb7215;animation:pulse 1.4s infinite}
+    .activity-empty{padding:26px 22px;color:var(--muted);font-size:.8rem;line-height:1.8}
+    .activity-empty a{color:var(--lime)}
+    .activity-bottom{border-top:1px solid var(--line);color:var(--muted)}
+    .activity-bottom .mono{font-size:.57rem}
+    .activity-bottom>a{font-size:.73rem;font-weight:700;color:var(--text)}
+    .activity-bottom>a:hover{color:var(--lime)}
+    @media(max-width:850px){.case-detail{padding-left:21px;grid-template-columns:1fr 1fr}.case-detail>a{grid-column:1/-1}}
+    @media(max-width:620px){.case-intro{align-items:flex-start;flex-direction:column;gap:12px;margin-top:44px}.case-study summary{grid-template-columns:48px 1fr 30px;gap:9px;padding:15px 12px}.case-summary strong{font-size:.82rem}.case-summary small{font-size:.66rem}.case-detail{grid-template-columns:1fr;gap:3px;padding:0 15px 18px}.case-detail>a{grid-column:auto}.activity-top,.activity-bottom{padding:15px}.activity-item{grid-template-columns:32px minmax(0,1fr);padding:14px 15px;gap:10px}.activity-icon{width:30px;height:30px}.activity-time{grid-column:2;padding-top:0;font-size:.56rem}.activity-live{font-size:.53rem}.activity-profile .mono{font-size:.52rem}}
+
     @media(max-width:850px){.hero-console{min-height:390px;max-width:520px;width:100%;margin:0 auto}.chip-top{right:0}.chip-bottom{left:0}.orbit-one{width:350px;height:350px}.orbit-two{width:290px;height:290px}}
     @media(max-width:620px){#scrollProgress{height:2px}.hero-console{min-height:350px;margin-top:8px}.console-shell{transform:none;width:calc(100% - 12px)}.console-body{padding:22px 17px 15px}.console-title{font-size:2.25rem}.terminal-line{font-size:.61rem;gap:6px}.terminal-comment{display:none}.chip-top{top:0;right:-2px}.chip-bottom{bottom:0;left:-2px}.float-chip{padding:9px 11px}.float-chip strong{font-size:.66rem}.orbit-one{width:280px;height:280px}.orbit-two{width:240px;height:240px}.ticker-group{font-size:.59rem;gap:17px}.contact-panel:after{opacity:.45}}
     @media(prefers-reduced-motion:reduce){.ticker-track,.float-chip,.console-caret{animation:none!important}.hero-console:hover .console-shell{transform:none}}
@@ -73,7 +120,7 @@
       <a class="brand" href="#home" aria-label="Francis Codes home"><span class="brand-mark">FC</span><span>francis<span style="color:var(--lime)">.</span>codes</span></a>
       <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navlinks" aria-label="Open navigation">☰</button>
       <div class="navlinks" id="navlinks">
-        <a href="#work">Work</a><a href="#about">About</a><a href="#stack">Toolkit</a><a href="#opensource">Open source</a>
+        <a href="#work">Work</a><a href="#about">About</a><a href="#stack">Toolkit</a><a href="#activity">Activity</a><a href="#opensource">Open source</a>
       </div>
       <a class="nav-cta" href="#contact">Let's talk <span aria-hidden="true">↗</span></a>
     </nav>
@@ -137,6 +184,13 @@
           <div class="project-body"><div class="project-meta"><span class="mono">COLLABORATION / ENGINEERING</span><span class="mono">04</span></div><h3>Open-source contributions</h3><p>Working in existing codebases, investigating bugs, improving tests, and collaborating through issues and pull requests across developer projects.</p><div class="chips"><span class="chip">Code review</span><span class="chip">Debugging</span><span class="chip">Testing</span><span class="chip">Git & GitHub</span></div><div class="project-links"><a href="#opensource">Explore contributions <span class="arrow">↘</span></a><a href="https://github.com/EzikeChikelu" target="_blank" rel="noreferrer">GitHub activity <span class="arrow">↗</span></a></div></div>
         </article>
       </div>
+
+      <div class="case-intro reveal"><div><p class="section-kicker mono">A closer look / Engineering notes</p><h3>Behind the build<span style="color:var(--lime)">.</span></h3></div><p class="section-intro">The thinking behind the interface: the problem, the decisions, and what each project taught me.</p></div>
+      <div class="case-grid">
+        <details class="case-study reveal"><summary><span class="case-index mono">CASE 01</span><span class="case-summary"><strong>Make blockchain data easier to inspect</strong><small>Stellar-Lens · Data clarity / Explorer tooling</small></span><span class="case-plus" aria-hidden="true">+</span></summary><div class="case-detail"><div><span class="mono">THE CHALLENGE</span><p>Public-ledger information can be technical and difficult to scan when all you need is a clear view of an account or transaction.</p></div><div><span class="mono">THE APPROACH</span><p>Build a focused, read-only browser experience around public Stellar data, with a clear interface and a TypeScript-based frontend.</p></div><div><span class="mono">WHAT IT SHOWS</span><p>Product thinking for developer tools: present useful information clearly while keeping the scope deliberately read-only.</p></div><a href="https://github.com/EzikeChikelu/stellar-lens" target="_blank" rel="noreferrer">Explore the implementation ↗</a></div></details>
+        <details class="case-study reveal"><summary><span class="case-index mono">CASE 02</span><span class="case-summary"><strong>Give market data a clearer home</strong><small>Live Market Dashboard · Data UI / Visualization</small></span><span class="case-plus" aria-hidden="true">+</span></summary><div class="case-detail"><div><span class="mono">THE CHALLENGE</span><p>Market information changes quickly. A useful dashboard should make prices and movement easy to scan instead of burying the signal in visual noise.</p></div><div><span class="mono">THE APPROACH</span><p>Explore a compact dashboard layout with market-oriented visual hierarchy, trend charts, and space for a watchlist and API-driven data.</p></div><div><span class="mono">WHAT IT SHOWS</span><p>How interface decisions, lightweight data visualization, and refresh behavior can work together in a live-feeling product.</p></div><a href="https://github.com/EzikeChikelu/Live" target="_blank" rel="noreferrer">Explore the implementation ↗</a></div></details>
+        <details class="case-study reveal"><summary><span class="case-index mono">CASE 03</span><span class="case-summary"><strong>Turn a brand site into a better journey</strong><small>Fashion Design Website · UX / Responsive web</small></span><span class="case-plus" aria-hidden="true">+</span></summary><div class="case-detail"><div><span class="mono">THE CHALLENGE</span><p>A visual business site needs to do more than look good: visitors should understand the brand and know how to make an inquiry or book.</p></div><div><span class="mono">THE APPROACH</span><p>Refine the responsive presentation and give booking and inquiry interactions a more considered, guided flow.</p></div><div><span class="mono">WHAT IT SHOWS</span><p>Applying design and frontend work to a real customer journey, not just a static visual layout.</p></div><a href="https://github.com/EzikeChikelu/fashion-designing-site" target="_blank" rel="noreferrer">Explore the implementation ↗</a></div></details>
+      </div>
     </section>
     <hr class="rule">
     <section class="section wrap" id="about">
@@ -161,6 +215,17 @@
       </div>
     </section>
     <hr class="rule">
+
+    <hr class="rule">
+    <section class="section wrap" id="activity">
+      <div class="section-head reveal"><div><p class="section-kicker mono">Live from GitHub / 05</p><h2>Recently in the open<span style="color:var(--lime)">.</span></h2></div><p class="section-intro">A live snapshot of public GitHub activity. Pull requests, commits, and collaboration—straight from the source.</p></div>
+      <div class="activity-panel reveal">
+        <div class="activity-top"><div class="activity-profile"><div class="activity-avatar">FC</div><div><strong>EzikeChikelu</strong><span class="mono">PUBLIC ACTIVITY FEED</span></div></div><div class="activity-live"><span></span> LIVE DATA</div></div>
+        <div id="githubActivity" class="activity-list" aria-live="polite"><div class="activity-loading"><span class="loader-dot"></span><span>Connecting to GitHub activity…</span></div></div>
+        <div class="activity-bottom"><span id="activityUpdated" class="mono">WAITING FOR GITHUB</span><a href="https://github.com/EzikeChikelu?tab=activity" target="_blank" rel="noreferrer">View all activity ↗</a></div>
+      </div>
+    </section>
+
     <section class="section wrap" id="opensource">
       <div class="section-head reveal"><div><p class="section-kicker mono">04 / Beyond my own repos</p><h2>Learning in the open<span style="color:var(--lime)">.</span></h2></div><p class="section-intro">Open-source work is where I practice reading unfamiliar code, communicating clearly, and making changes that fit a wider project.</p></div>
       <div class="contrib-grid">
@@ -240,6 +305,61 @@
         card.addEventListener('pointerleave', () => { card.style.transform = ''; });
       });
     }
+
+
+    // Live public GitHub activity. If rate-limited or offline, the profile link remains available.
+    (async function loadGitHubActivity() {
+      const target = document.getElementById('githubActivity');
+      const updated = document.getElementById('activityUpdated');
+      const profile = 'https://github.com/EzikeChikelu';
+      const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+      const ago = value => {
+        const seconds = Math.max(0, Math.floor((Date.now() - new Date(value).getTime()) / 1000));
+        if (seconds < 60) return 'just now';
+        if (seconds < 3600) return Math.floor(seconds/60) + 'm ago';
+        if (seconds < 86400) return Math.floor(seconds/3600) + 'h ago';
+        if (seconds < 604800) return Math.floor(seconds/86400) + 'd ago';
+        return new Date(value).toLocaleDateString(undefined,{month:'short',day:'numeric'});
+      };
+      const eventInfo = event => {
+        const repo = event.repo?.name || 'GitHub repository';
+        const payload = event.payload || {};
+        switch (event.type) {
+          case 'PushEvent': return {icon:'⌘',title:'Pushed code',detail:repo + ' · ' + (payload.size || (payload.commits || []).length || 1) + ' commit(s)'};
+          case 'PullRequestEvent': return {icon:'⑂',title:(payload.action || 'Updated') + ' pull request',detail:repo + (payload.pull_request?.title ? ' · ' + payload.pull_request.title : '')};
+          case 'IssuesEvent': return {icon:'#',title:(payload.action || 'Updated') + ' an issue',detail:repo + (payload.issue?.title ? ' · ' + payload.issue.title : '')};
+          case 'IssueCommentEvent': return {icon:'↳',title:'Joined an issue discussion',detail:repo};
+          case 'PullRequestReviewEvent': return {icon:'✓',title:'Reviewed a pull request',detail:repo};
+          case 'CreateEvent': return {icon:'＋',title:'Created ' + (payload.ref_type || 'a repository item'),detail:repo + (payload.ref ? ' · ' + payload.ref : '')};
+          case 'WatchEvent': return {icon:'☆',title:'Starred a repository',detail:repo};
+          case 'ForkEvent': return {icon:'⑂',title:'Forked a repository',detail:repo};
+          case 'ReleaseEvent': return {icon:'↗',title:'Published a release',detail:repo + (payload.release?.tag_name ? ' · ' + payload.release.tag_name : '')};
+          default: return null;
+        }
+      };
+      try {
+        const response = await fetch('https://api.github.com/users/EzikeChikelu/events/public?per_page=30', {
+          headers:{'Accept':'application/vnd.github+json'},
+          signal:AbortSignal.timeout(9000)
+        });
+        if (!response.ok) throw new Error('GitHub returned ' + response.status);
+        const events = await response.json();
+        const rows = events.map(event => ({event,info:eventInfo(event)})).filter(row => row.info).slice(0,5);
+        if (!rows.length) {
+          target.innerHTML = '<div class="activity-empty">No recent public events were returned. Explore <a href="' + profile + '?tab=activity" target="_blank" rel="noreferrer">the full GitHub activity feed</a> for the latest updates.</div>';
+          updated.textContent = 'NO RECENT EVENTS';
+          return;
+        }
+        target.innerHTML = rows.map(({event,info}) => {
+          const repoUrl = 'https://github.com/' + encodeURIComponent(event.repo.name).replace('%2F','/');
+          return '<article class="activity-item"><div class="activity-icon" aria-hidden="true">' + esc(info.icon) + '</div><div class="activity-copy"><strong>' + esc(info.title) + '</strong><p><a href="' + repoUrl + '" target="_blank" rel="noreferrer">' + esc(info.detail) + '</a></p></div><time class="activity-time" datetime="' + esc(event.created_at) + '">' + esc(ago(event.created_at)) + '</time></article>';
+        }).join('');
+        updated.textContent = 'UPDATED ' + new Date().toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
+      } catch (error) {
+        target.innerHTML = '<div class="activity-empty">Live activity could not load right now—GitHub may be rate-limiting this request or your connection may be offline. Your work is still available on <a href="' + profile + '?tab=activity" target="_blank" rel="noreferrer">GitHub activity ↗</a>.</div>';
+        updated.textContent = 'LIVE FEED UNAVAILABLE';
+      }
+    })();
 
     const topbar = document.getElementById('topbar');
     const menuBtn = document.getElementById('menuBtn');
