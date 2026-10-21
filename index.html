@@ -168,6 +168,21 @@
       .case-study summary{grid-template-columns:1fr 24px}
       .case-index{grid-column:1/-1}
     }
+  
+    /* Meet the developer introduction */
+    .meet-dev{padding:38px 0 20px}
+    .meet-dev-card{position:relative;display:grid;grid-template-columns:minmax(190px,.62fr) 1.38fr;align-items:center;gap:clamp(24px,5vw,64px);padding:clamp(22px,4vw,44px);overflow:hidden;border:1px solid rgba(209,251,114,.2);border-radius:26px;background:radial-gradient(ellipse at 0% 0%,rgba(209,251,114,.09),transparent 48%),linear-gradient(135deg,#171b20,#101115 75%)}
+    .meet-dev-photo-wrap{position:relative;width:min(100%,260px);margin-inline:auto;aspect-ratio:4/5;border-radius:20px;overflow:hidden;border:1px solid #ffffff25;background:#1a1d24;box-shadow:0 24px 60px #0006}
+    .meet-dev-photo{width:100%;height:100%;display:block;object-fit:cover;object-position:center 30%}
+    .meet-dev-photo-wrap:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(10,11,14,.28));pointer-events:none}
+    .meet-dev-copy{position:relative;z-index:1}
+    .meet-dev-copy h2{font-size:clamp(2.5rem,5.5vw,4.8rem);line-height:1;letter-spacing:-.08em;margin:16px 0 18px}
+    .meet-dev-copy h2 span{color:var(--lime)}
+    .meet-dev-copy p{max-width:610px;color:#b1b6c0;font-size:clamp(.94rem,1.4vw,1.08rem);line-height:1.85;margin:0}
+    .meet-dev-cta{display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin-top:25px}
+    .meet-dev-pitch{color:var(--lime);font-weight:800;font-size:1rem;letter-spacing:-.025em}
+    @media(max-width:680px){.meet-dev{padding-top:22px}.meet-dev-card{grid-template-columns:1fr;gap:24px;padding:20px}.meet-dev-photo-wrap{width:min(72%,240px);aspect-ratio:4/4.5}.meet-dev-copy{text-align:center}.meet-dev-copy .eyebrow{justify-content:center}.meet-dev-copy .eyebrow:before{display:none}.meet-dev-copy h2{font-size:clamp(2.5rem,12vw,3.7rem)}.meet-dev-cta{justify-content:center}.meet-dev-pitch{width:100%}}
+
   </style>
 </head>
 <body>
@@ -186,6 +201,24 @@
     </nav>
   </header>
   <main id="main">
+
+    <section class="meet-dev wrap" aria-labelledby="meet-dev-title">
+      <div class="meet-dev-card reveal">
+        <div class="meet-dev-photo-wrap">
+          <img class="meet-dev-photo" src="./Myself.png" alt="Francis, the developer behind this portfolio" fetchpriority="high">
+        </div>
+        <div class="meet-dev-copy">
+          <p class="eyebrow mono">A little introduction</p>
+          <h2 id="meet-dev-title">Meet the <span>Dev.</span></h2>
+          <p>I'm Francis, a software developer who enjoys turning ideas into useful, polished digital experiences. I build websites and web apps, solve problems through code, and keep growing through real projects and open-source collaboration.</p>
+          <div class="meet-dev-cta">
+            <span class="meet-dev-pitch">Need a website? I'm your guy.</span>
+            <a class="button primary" href="#contact">Let's build something <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="hero wrap" id="home">
       <div class="hero-grid">
         <div class="reveal">
