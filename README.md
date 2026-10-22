@@ -1,35 +1,46 @@
 # Francis Codes — Developer Portfolio
 
-A premium, responsive developer portfolio for Francis Codes, built as a lightweight static site and deployed with GitHub Pages.
+A responsive developer portfolio built with **React, TypeScript, and Vite** and deployed on GitHub Pages.
 
-## Features
+## Stack
 
-- Responsive layout for mobile, tablet, and desktop
-- Dark visual system with subtle motion and hover details
-- Accessible mobile navigation and project filters
-- Reduced-motion support for visitors who prefer less animation
-- Project showcases, open-source links, toolkit, and contact actions
-- No build step or JavaScript framework required
+- React 18 + TypeScript
+- Vite production bundling
+- Lucide icons
+- Responsive CSS design system with dark/light themes and motion
+- GitHub public events API for a live activity panel
 
-## Projects featured
+## Highlights
 
-- [Stellar-Lens](https://github.com/EzikeChikelu/stellar-lens)
-- [Live Market Dashboard](https://github.com/EzikeChikelu/Live)
-- [Fashion Design Website](https://github.com/EzikeChikelu/fashion-designing-site)
-- Selected open-source pull requests linked in the site
+- Modular React interface and typed project data
+- Responsive navigation and project filters
+- Persistent dark/light mode
+- Project previews, source links, and contact actions
+- Public GitHub activity with loading and error states
+- Reduced-motion support, semantic landmarks, and visible keyboard focus
+- GitHub Actions type-checks and builds before deploying only `dist/`
 
 ## Run locally
 
-Open `index.html` in a browser, or serve the folder with any static file server.
+```bash
+npm install
+npm run dev
+```
 
-## Deploy
+## Validate and build
 
-The workflow at `.github/workflows/pages.yml` deploys the repository root to GitHub Pages on every push to `main`.
+```bash
+npm run typecheck
+npm run build
+npm run preview
+```
 
-The deployment workflow attempts to enable GitHub Pages automatically. If the first run still asks for Pages setup, open **Settings → Pages** and choose **GitHub Actions** as the build and deployment source. After the first successful workflow, the site should be available at:
+## Deployment
+
+Pushes to `main` run `.github/workflows/pages.yml`. Vite is configured for the project-site base path:
 
 https://ezikechikelu.github.io/Portfolio-/
 
-## Customize
+If Pages has not been configured, open **Settings → Pages** and select **GitHub Actions** as the deployment source.
 
-Update the project descriptions and links in `index.html` as project status changes. Do not publish private contact details or claim a pull request was merged unless that status is verified.
+Edit project metadata in `src/data.ts`, the interface in `src/App.tsx`, and styling in `src/styles.css`. Verify live URLs and contribution status before describing a project as deployed or a pull request as merged.
