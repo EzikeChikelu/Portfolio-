@@ -51,13 +51,13 @@ function ProjectCard({ project, index }: { project: typeof projects[number]; ind
 export default function App() {
   const [filter, setFilter] = useState<Filter>("All work");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [light, setLight] = useState(false);
+  const [light, setLight] = useState(true);
   const [copied, setCopied] = useState(false);
   const [events, setEvents] = useState<GitHubEvent[]>([]);
   const [activity, setActivity] = useState<"loading"|"ready"|"error">("loading");
   const [progress, setProgress] = useState(0);
   const visibleProjects = useMemo(() => filter === "All work" ? projects : projects.filter(project => project.category === filter as ProjectCategory), [filter]);
-  useEffect(() => { if (window.localStorage.getItem("portfolio-theme") === "light") setLight(true); const onScroll = () => { const max = document.documentElement.scrollHeight - innerHeight; setProgress(max > 0 ? scrollY / max * 100 : 0); }; addEventListener("scroll", onScroll, { passive: true }); onScroll(); return () => removeEventListener("scroll", onScroll); }, []);
+  useEffect(() => { const savedTheme = window.localStorage.getItem("portfolio-theme"); if (savedTheme === "dark") setLight(false); else if (savedTheme === "light") setLight(true); const onScroll = () => { const max = document.documentElement.scrollHeight - innerHeight; setProgress(max > 0 ? scrollY / max * 100 : 0); }; addEventListener("scroll", onScroll, { passive: true }); onScroll(); return () => removeEventListener("scroll", onScroll); }, []);
   useEffect(() => { document.documentElement.dataset.theme = light ? "light" : "dark"; window.localStorage.setItem("portfolio-theme", light ? "light" : "dark"); }, [light]);
   useEffect(() => {
     const elements = document.querySelectorAll(".reveal");
