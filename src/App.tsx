@@ -8,15 +8,18 @@ import type { ProjectCategory } from "./data";
 
 const filters = ["All work", "AI & Tools", "Web Apps", "Client Work", "Open Source"] as const;
 type Filter = typeof filters[number];
-type GitHubEvent = { id: string; type: string; created_at: string; repo?: { name?: string }; payload?: { pull_request?: { title?: string }; issue?: { title?: string } } };
+type GitHubEvent = { id: string; type: string; created_at: string; repo?: { name?: string }; payload?: { pull_request?: { title?: string }; issue?: { title?: string } }; html_url?: string };
 
 function labelEvent(event: GitHubEvent) {
   const repo = event.repo?.name ?? "GitHub repository";
   switch (event.type) {
-    case "PushEvent": return { title: "Pushed code", detail: repo, mark: "↗" };
-    case "PullRequestEvent": return { title: "Updated a pull request", detail: event.payload?.pull_request?.title ?? repo, mark: "⑂" };
+    case "PushEvent":
+    case "CommitActivity": return { title: "Pushed code", detail: event.payload?.issue?.title ?? repo, mark: "↗" };
+    case "PullRequestEvent":
+    case "PullRequestActivity": return { title: "Updated a pull request", detail: event.payload?.pull_request?.title ?? event.payload?.issue?.title ?? repo, mark: "⑂" };
     case "PullRequestReviewEvent": return { title: "Reviewed a pull request", detail: repo, mark: "✓" };
-    case "IssuesEvent": return { title: "Worked on an issue", detail: event.payload?.issue?.title ?? repo, mark: "#" };
+    case "IssuesEvent":
+    case "IssueActivity": return { title: "Worked on an issue", detail: event.payload?.issue?.title ?? repo, mark: "#" };
     case "IssueCommentEvent": return { title: "Joined a discussion", detail: repo, mark: "↳" };
     case "CreateEvent": return { title: "Created something new", detail: repo, mark: "+" };
     default: return null;
@@ -67,12 +70,53 @@ export default function App() {
     elements.forEach(el => observer.observe(el)); return () => observer.disconnect();
   }, [filter, events, activity]);
   useEffect(() => {
+    let active = true;
     const controller = new AbortController();
-    fetch("https://api.github.com/users/EzikeChikelu/events/public?per_page=25", { headers: { Accept: "application/vnd.github+json" }, signal: controller.signal })
-      .then(response => { if (!response.ok) throw new Error("Activity unavailable"); return response.json() as Promise<GitHubEvent[]>; })
-      .then(data => { setEvents(data.filter(event => labelEvent(event)).slice(0, 4)); setActivity("ready"); })
-      .catch(error => { if (error instanceof Error && error.name !== "AbortError") setActivity("error"); });
-    return () => controller.abort();
+    const headers = { Accept: "application/vnd.github+json" };
+    const loadActivity = async () => {
+      setActivity(current => current === "ready" ? "ready" : "loading");
+      const requests = [
+        fetch("https://api.github.com/users/EzikeChikelu/events/public?per_page=30", { headers, signal: controller.signal })
+          .then(response => { if (!response.ok) throw new Error("Events request failed"); return response.json(); })
+          .then(data => (Array.isArray(data) ? data : []) as GitHubEvent[]),
+        fetch("https://api.github.com/search/commits?q=author:EzikeChikelu&sort=committer-date&order=desc&per_page=10", { headers, signal: controller.signal })
+          .then(response => { if (!response.ok) throw new Error("Commits request failed"); return response.json(); })
+          .then(data => (Array.isArray(data.items) ? data.items : []).map((item: any) => ({
+            id: "commit-" + item.sha,
+            type: "CommitActivity",
+            created_at: item.commit?.committer?.date ?? item.commit?.author?.date ?? new Date().toISOString(),
+            repo: { name: item.repository?.full_name ?? "GitHub repository" },
+            payload: { issue: { title: String(item.commit?.message ?? "Commit").split("\\n")[0] } },
+            html_url: item.html_url
+          })) as GitHubEvent[]),
+        fetch("https://api.github.com/search/issues?q=author:EzikeChikelu&sort=updated&order=desc&per_page=10", { headers, signal: controller.signal })
+          .then(response => { if (!response.ok) throw new Error("Issues request failed"); return response.json(); })
+          .then(data => (Array.isArray(data.items) ? data.items : []).map((item: any) => ({
+            id: "issue-" + item.id,
+            type: item.pull_request ? "PullRequestActivity" : "IssueActivity",
+            created_at: item.updated_at ?? item.created_at ?? new Date().toISOString(),
+            repo: { name: String(item.repository_url ?? "").replace("https://api.github.com/repos/", "") || "GitHub repository" },
+            payload: item.pull_request ? { pull_request: { title: item.title } } : { issue: { title: item.title } },
+            html_url: item.html_url
+          })) as GitHubEvent[])
+      ];
+      const results = await Promise.allSettled(requests);
+      if (!active) return;
+      const combined = results.flatMap(result => result.status === "fulfilled" ? result.value : []);
+      const unique = new Map<string, GitHubEvent>();
+      combined.filter(event => labelEvent(event)).forEach(event => {
+        const key = event.html_url ?? event.id;
+        if (!unique.has(key)) unique.set(key, event);
+      });
+      const latest = [...unique.values()]
+        .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+        .slice(0, 4);
+      setEvents(latest);
+      setActivity(results.some(result => result.status === "fulfilled") ? "ready" : "error");
+    };
+    void loadActivity();
+    const refresh = window.setInterval(() => { void loadActivity(); }, 5 * 60 * 1000);
+    return () => { active = false; controller.abort(); window.clearInterval(refresh); };
   }, []);
   async function copyEmail() { try { await navigator.clipboard.writeText("ezikechikelu258@gmail.com"); setCopied(true); window.setTimeout(() => setCopied(false), 2200); } catch { window.location.href = "mailto:ezikechikelu258@gmail.com"; } }
   const closeMenu = () => setMenuOpen(false);
